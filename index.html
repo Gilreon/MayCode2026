@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SiteForge Studio | Website Redesigns That Convert</title>
+    <title>OrbitalDex | Website Redesigns That Convert</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,9 +14,9 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="SiteForge Studio home">
-        <span class="brand-mark">SF</span>
-        <span>SiteForge Studio</span>
+      <a class="brand" href="#top" aria-label="Orbital Dex home">
+        <span class="brand-mark">OD</span>
+        <span>Orbital Dex</span>
       </a>
       <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -28,6 +28,12 @@
         <a href="#pricing">Packages</a>
         <a class="nav-cta" href="#contact">Book audit</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-theme-toggle>
+        <span class="theme-toggle-track">
+          <span class="theme-toggle-thumb"></span>
+        </span>
+        <span class="theme-toggle-text" data-theme-label>Light</span>
+      </button>
     </header>
 
     <main id="top">
@@ -176,8 +182,8 @@
           <p class="eyebrow">Packages</p>
           <h2>Choose the level of rescue your site needs.</h2>
         </div>
-        <div class="package-grid">
-          <article class="package">
+        <div class="package-grid" role="radiogroup" aria-label="Package selection">
+          <article class="package" role="radio" tabindex="-1" aria-checked="false" data-package-option="Homepage Fix">
             <h3>Homepage Fix</h3>
             <p>For teams whose first impression needs immediate help.</p>
             <strong>$1,500+</strong>
@@ -187,7 +193,7 @@
               <li>Mobile polish</li>
             </ul>
           </article>
-          <article class="package featured">
+          <article class="package featured is-selected" role="radio" tabindex="0" aria-checked="true" data-package-option="Full Revamp">
             <span class="badge">Most popular</span>
             <h3>Full Revamp</h3>
             <p>For dated sites that need a complete strategic refresh.</p>
@@ -198,7 +204,7 @@
               <li>Speed and SEO basics</li>
             </ul>
           </article>
-          <article class="package">
+          <article class="package" role="radio" tabindex="-1" aria-checked="false" data-package-option="Launch Partner">
             <h3>Launch Partner</h3>
             <p>For companies that want ongoing testing and improvements.</p>
             <strong>$2,000/mo</strong>
@@ -217,14 +223,16 @@
           <h2>Send us the site you are embarrassed to share.</h2>
           <p>We will reply with three practical fixes and a clear path for turning it into a stronger asset.</p>
         </div>
-        <form class="contact-form">
+        <form class="contact-form" data-contact-form>
+          <input type="hidden" name="package" value="Full Revamp" data-selected-package />
+          <p class="selected-package" aria-live="polite" data-selected-package-label>Selected package: Full Revamp</p>
           <label>
             Name
             <input type="text" name="name" placeholder="Alex Morgan" />
           </label>
           <label>
             Website URL
-            <input type="url" name="website" placeholder="https://yourcompany.com" />
+            <input type="text" name="website" placeholder="https://yourcompany.com" maxlength="100" />
           </label>
           <label>
             Biggest concern
