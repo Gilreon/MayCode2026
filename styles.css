@@ -637,8 +637,11 @@ h3 {
 
 .package.featured,
 .package.is-selected {
-  border-color: var(--accent);
   box-shadow: var(--shadow);
+}
+
+.package.is-selected {
+  border-color: var(--coral);
 }
 
 .package.is-selected::after {

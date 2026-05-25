@@ -10,12 +10,10 @@ const packageOptions = document.querySelectorAll("[data-package-option]");
 const selectedPackageInput = document.querySelector("[data-selected-package]");
 const selectedPackageLabel = document.querySelector("[data-selected-package-label]");
 const contactForm = document.querySelector("[data-contact-form]");
-
-const getStoredTheme = () => localStorage.getItem("site-theme");
+const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
 const getPreferredTheme = () => {
-  const storedTheme = getStoredTheme();
-  return storedTheme || (themePreference.matches ? "dark" : "light");
+  return themePreference.matches ? "dark" : "light";
 };
 
 const setTheme = (theme) => {
@@ -37,6 +35,31 @@ if (navToggle && siteNav) {
     navToggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
+
+scrollLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const targetId = link.getAttribute("href");
+
+    if (!targetId || targetId === "#") {
+      return;
+    }
+
+    const target = document.querySelector(targetId);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", targetId);
+
+    if (siteNav && navToggle) {
+      siteNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+});
 
 if (slider && beforePanel && sliderLine) {
   const updateComparison = () => {
@@ -97,15 +120,12 @@ if (packageOptions.length && selectedPackageInput && selectedPackageLabel) {
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    localStorage.setItem("site-theme", nextTheme);
     setTheme(nextTheme);
   });
 }
 
 themePreference.addEventListener("change", () => {
-  if (!getStoredTheme()) {
-    setTheme(getPreferredTheme());
-  }
+  setTheme(getPreferredTheme());
 });
 
 if (contactForm) {
